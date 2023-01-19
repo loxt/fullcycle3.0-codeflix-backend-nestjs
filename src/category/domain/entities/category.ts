@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 export type CategoryProperties = {
   name: string;
   description?: string;
@@ -6,10 +8,11 @@ export type CategoryProperties = {
 };
 
 export class Category {
-  constructor(public readonly props: CategoryProperties) {
+  constructor(public readonly props: CategoryProperties, public readonly id?: string) {
+    this.id = id || uuid();
     this.description = this.props.description;
     this.isActive = this.props.isActive;
-    this.props.createdAt = this.props.createdAt ?? new Date();
+    this.props.createdAt = this.props.createdAt ?? new Date( );
   }
 
   get name() {

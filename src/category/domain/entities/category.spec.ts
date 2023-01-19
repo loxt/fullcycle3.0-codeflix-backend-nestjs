@@ -1,5 +1,6 @@
 import { Category } from "./category";
 import { omit } from "lodash";
+import { validate as validateUUID } from 'uuid';
 
 describe("Category unit tests", function () {
   it("should be created", function () {
@@ -24,6 +25,18 @@ describe("Category unit tests", function () {
     });
     expect(category.name).toBe("Category name");
   });
+
+  test("should register id field", () => {
+    const category = new Category({
+      name: "Category name",
+    });
+    expect(validateUUID(category.id)).toBeTruthy()
+
+    const category2 = new Category({
+      name: "Category name",
+    }, "123456789");
+    expect(category2.id).toBe("123456789");
+  })
 
   test("getter and setter of description field", function () {
     const category = new Category({
