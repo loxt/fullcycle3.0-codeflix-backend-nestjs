@@ -2,7 +2,7 @@ import { v4 as uuid, validate as uuidValidate } from "uuid";
 import { InvalidUuidError } from "../../errors/invalid-uuid.error";
 
 export class UniqueEntityId {
-  constructor(private readonly id?: string) {
+  constructor(public readonly id?: string) {
     this.id = id ? id : uuid();
     this.validate();
   }
